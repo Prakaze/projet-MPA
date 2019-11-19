@@ -67,7 +67,7 @@ public class MapTileCategory {
 		String name = "";
 		for(Direction direction : Direction.values())
 			if(this.goesInDirection(direction)) name += direction.getName();
-		return name.equals("") ? "Empty" : name;
+		return name.equals("") ? "Vide" : name;
 	}
 	
 	@Override

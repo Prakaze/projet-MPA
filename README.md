@@ -1,2 +1,5 @@
 # projet-MPA
-GÃ©nÃ©ration de cartes d'altitudes
+Génération de cartes d'altitudes
+
+##Instructions d'utilisation:
+À l'exécution, le programme créé dans le dossier courrant un dossier "output" qui contient 100 images réparties dans 12 fichiers différents correspondant à chacune des catégories d'images.
