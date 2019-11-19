@@ -3,7 +3,7 @@ package mpa.maths.random;
 import mpa.maths.Vector2D;
 
 /**
- * temporary class to test seed based noise textures
+ * temporary class to test seed based noise textures, not used for now
  * @author loicv
  *
  */

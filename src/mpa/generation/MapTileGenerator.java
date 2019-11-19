@@ -7,7 +7,6 @@ import java.util.Collection;
 
 import mpa.maths.Vector2D;
 import mpa.maths.random.Random;
-import mpa.maths.random.PseudoRandom;
 import mpa.maths.sdfs.EmptySDF;
 import mpa.maths.sdfs.LineSDF;
 import mpa.maths.sdfs.LineSegmentSDF;
@@ -29,8 +28,6 @@ public class MapTileGenerator {
 	 */
 	public MapTile generateMapTile() {
 		
-		int seed = Random.nextInt(10000);
-		
 		int height = Random.nextInt(50, 150);
 		int width = Random.nextInt(50, 150);
 		
@@ -47,16 +44,10 @@ public class MapTileGenerator {
 				
 				double distance = sdf.getDistance(position.copy());
 				
-				int value;
-				
-				//basic testing function for the noise textures
-				if(distance < width+height)
-					value = (int)(PseudoRandom.noiseTexture(position.copy().mult(1.0/height), seed) * 2.0*(30.0 + distance) + distance);
-				else 
-					value = (int)(PseudoRandom.noiseTexture(position.copy().mult(1.0/height), seed) * 255.0);
+				int value = 255; //background
 					
 				double interpolationFactor = Math.max(Math.min(distance, .5), -.5) + .5; //for antialiasing
-				value = (int)(interpolationFactor * (value) + (1.0-interpolationFactor) * (255));
+				value = (int)(interpolationFactor * (value) + (1.0-interpolationFactor) * (75));
 				value = Math.min(Math.max(value, 0), 255);
 				color = new Color(value, value, value);
 				
@@ -86,7 +77,7 @@ public class MapTileGenerator {
 				Vector2D normal = direction.getNormal();
 				Vector2D crossNormal = new Vector2D(normal.y, -normal.x).mult(rand);
 				
-				//this would take too long to explain ...
+				//magic happens
 				Vector2D start = normal.copy().mult(.5).add(crossNormal).add(new Vector2D(.5, .5)).mult(new Vector2D(width, height));
 				Vector2D end = normal.copy().mult(Random.nextDouble(.5)).add(crossNormal).add(new Vector2D(.5, .5)).mult(new Vector2D(width, height));
 				
