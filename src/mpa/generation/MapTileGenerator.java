@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import mpa.maths.Vector2D;
 import mpa.maths.random.Random;
+import mpa.maths.random.PseudoRandom;
 import mpa.maths.sdfs.EmptySDF;
 import mpa.maths.sdfs.LineSDF;
 import mpa.maths.sdfs.LineSegmentSDF;
@@ -28,6 +29,8 @@ public class MapTileGenerator {
 	 */
 	public MapTile generateMapTile() {
 		
+		int seed = Random.nextInt(10000);
+		
 		int height = Random.nextInt(50, 150);
 		int width = Random.nextInt(50, 150);
 		
@@ -44,10 +47,16 @@ public class MapTileGenerator {
 				
 				double distance = sdf.getDistance(position.copy());
 				
-				double interpolationFactor = Math.max(Math.min(distance, .5), -.5) + .5;
+				int value;
 				
-				int value = (int)(interpolationFactor * (245) + (1.0-interpolationFactor) * (75));
-				value += Random.nextInt(-10, +10); //noise
+				//basic testing function for the noise textures
+				if(distance < width+height)
+					value = (int)(PseudoRandom.noiseTexture(position.copy().mult(1.0/height), seed) * 2.0*(30.0 + distance) + distance);
+				else 
+					value = (int)(PseudoRandom.noiseTexture(position.copy().mult(1.0/height), seed) * 255.0);
+					
+				double interpolationFactor = Math.max(Math.min(distance, .5), -.5) + .5; //for antialiasing
+				value = (int)(interpolationFactor * (value) + (1.0-interpolationFactor) * (255));
 				value = Math.min(Math.max(value, 0), 255);
 				color = new Color(value, value, value);
 				
