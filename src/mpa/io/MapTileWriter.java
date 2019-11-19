@@ -23,7 +23,7 @@ public class MapTileWriter {
 		this.path = path;
 		this.format = format;
 		
-		for(MapTileCategory category : MapTileCategory.values()) {
+		for(MapTileCategory category : MapTileCategory.ALL_CATEGORIES) {
 			File directory = new File(this.path + category.getName() + "/");
 		    if(!directory.exists()) directory.mkdirs();
 		}
@@ -34,16 +34,16 @@ public class MapTileWriter {
 	 * 
 	 * The files are saves in a file system with this architecture:
 	 * 	[path]
-	 * 		L [category]
+	 * 		L [category name]
 	 * 			L [UUID].[format]
 	 * 
 	 * For instance:
 	 * 	./output
-	 * 		L Nord-Nord
+	 * 		L Empty
 	 * 			L 7ec9f112-c6e8-4b1b-9e48-b2a9fca893fc.png
 	 * 			L 7ec5631f-bfdb-4c07-8fb3-26a0ee5da6a9.png
 	 * 			L ...
-	 * 		L Nord-Est
+	 * 		L Est
 	 * 			L 50bfb10c-2e3f-4646-8350-24099bb7a191.png
 	 * 			L ...
 	 * 		L ...
