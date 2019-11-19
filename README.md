@@ -6,4 +6,5 @@ L'exécution, le programme créé dans le dossier courrant un dossier "output" q
 
 ## Example d'images produites
 Extrait de la catégorie Nord-Est-Sud:
+
 ![Imgur](https://i.imgur.com/BYqrOrd.png)
